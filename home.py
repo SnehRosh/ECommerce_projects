@@ -1,3 +1,4 @@
+from cgi import print_exception
 import streamlit as st
 import pandas as pd
 import plotly.express as px
@@ -9,7 +10,8 @@ st.set_page_config(
     page_title="E-Commerce Analysis App",
     page_icon="🛍️"
 )
-Price=list(range(10,30))
+price_llimit = 50
+price_ulimit = 100
 @st.cache_data()
 def load_data(path):
     df = pd.read_csv('Sales_Transaction.csv')   
@@ -41,9 +43,8 @@ c1, c2=st.columns([1,3])
 
 limit=c2.slider("Select Number of Products",1,25, value=5)
 products = top_products.index.tolist()[:limit]
-products_df = df.loc[products,Price].T
-fig2=px.area(products_df,x=products_df.index,y=products_df.columns)
-
+trans_limited = df[(df.Price > 5) & (df.Price <= 6)] 
+fig2=px.area(trans_limited,x='ProductName',y='Price')
 
 c1.dataframe(top_products)
 c2.plotly_chart(fig2 ,use_container_width=True)
@@ -53,7 +54,7 @@ c1,c2=st.columns([1,3])
 product_list=df.index.tolist()
 products=c2.multiselect("Select products",product_list)
 if products:
-    products_df=df.loc[products,Price].T
+    products_df=df[(df.Price > 50) & (df.Price <= 60)] 
     fig3=px.line(
         products_df,
         x=products_df.index,
