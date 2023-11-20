@@ -1,8 +1,10 @@
 from cgi import print_exception
+from turtle import *
 import streamlit as st
 import pandas as pd
 import plotly.express as px
 import numpy as np
+
 
 # Config
 st.set_page_config(
@@ -10,6 +12,7 @@ st.set_page_config(
     page_title="E-Commerce Analysis App",
     page_icon="🛍️"
 )
+ 
 price_llimit = 50
 price_ulimit = 100
 @st.cache_data()
@@ -44,7 +47,7 @@ c1, c2=st.columns([1,3])
 limit=c2.slider("Select Number of Products",1,25, value=5)
 products = top_products.index.tolist()[:limit]
 trans_limited = df[(df.Price > 5) & (df.Price <= 6)] 
-fig2=px.area(trans_limited,x='ProductName',y='Price')
+fig2 = px.area(trans_limited,x='ProductName',y='Price')
 
 c1.dataframe(top_products)
 c2.plotly_chart(fig2 ,use_container_width=True)
@@ -53,6 +56,7 @@ st.subheader("Trend Comparison")
 c1,c2=st.columns([1,3])
 product_list=df.index.tolist()
 products=c2.multiselect("Select products",product_list)
+
 if products:
     products_df=df[(df.Price > 50) & (df.Price <= 60)] 
     fig3=px.line(
