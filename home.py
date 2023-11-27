@@ -48,15 +48,18 @@ fig = px.histogram(df,
 st.plotly_chart(fig,use_container_width=True)
 
 #Product Trend based on age
+c1,c2=st.columns(2)
 st.subheader('Product Trend Analysis',divider='orange')
-fig2 = sns.lineplot(
+fig2,ax=plt.subplots()
+ax = sns.lineplot(
              data=df,
              x='Age',
              y='Department Name',
              hue='Department Name'
             )
+c1.pyplot(fig2)
 plt.show()
-fig2,ax=plt.subplots()
+
 
 #Top Product based on rating
 top_products = df.sort_values(by='Rating',ascending=False).head(10)
@@ -73,16 +76,17 @@ fig3 = px.bar(tp_list,x='Class Name',y='Clothing ID',
 c2.plotly_chart(fig3,use_container_width=True)
 
 #Scatter plot visualisation based on Rating of Division Name
+c1,c2 = st.columns(2)
 st.subheader('Cloths Rating based on Division',divider='rainbow')
-fig4 = sns.scatterplot(data=df,x='Division Name',
-                       y='Rating',
-                       hue='Rating',
-                       palette='hot',
-                       style='Division Name')
-fig4,ax=plt.subplots()
+fig4 = sns.relplot(data=df,
+                x='Division Name',
+                y='Rating',
+                hue="Rating",
+                style="Department Name")
+c1.pyplot(fig4)
 
 #Sunburst plotting on age and clothing analysis
-c1,c2 = st.columns([1,2])
+c1,c2 = st.columns(2)
 df_sun = df[['Clothing ID','Division Name','Department Name','Class Name','Rating']].head(10)
 c2.dataframe(df_sun)
 trans_nan = df.dropna()
@@ -110,8 +114,14 @@ c2.image("https://raw.githubusercontent.com/wpcodevo/lc28-fashion-ecommerce-webs
 
 # Rating Analysis on Departments Name
 st.subheader('Rating analysis based on Departments Name ',divider='violet')
-fig7 = sns.displot(data=df, x='Rating',hue='Department Name')
-fig7,ax=plt.subplots()
+c1,c2=st.columns(2)
+fig7 = sns.displot(data=df, x='Rating',hue='Department Name',binwidth=0.5)
+c2.pyplot(fig7)
+
+
+
+st.subheader('Positive Feedback Counts',divider='blue')
+fig8 = df['Positive Feedback Count'].plot(kind='area',figsize=(15,5))
 plt.show()
 
 st.toast('Your graph has been loaded!',icon='🫡')
