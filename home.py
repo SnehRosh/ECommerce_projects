@@ -28,7 +28,7 @@ with st.container():
     st.title('Women Fashion Trend Data-Analysis')
     st.image("https://www.nopcommerce.com/images/blog/2023-march-fashion-ecommerce-trends/__comp.jpg",caption='Ecom Analysis')
     st.subheader("Data Summary",divider='red')
-c1,c2,c3,c4=st.columns(4)
+c1,c2,c3=st.columns(3)
 
 total_products=df.shape[0]
 type_trend="Women Clothing"
@@ -36,8 +36,9 @@ type_trend="Women Clothing"
 #Main Heads
 c1.metric("Total PRODUCTS",total_products)
 c2.metric("Type",type_trend)
-c3.image("https://www.dlf.pt/dfpng/middlepng/475-4754245_women-fashion-ecommerce-website-development-fashion-website-png.png",width=500)
-
+c3.image("https://www.dlf.pt/dfpng/middlepng/475-4754245_women-fashion-ecommerce-website-development-fashion-website-png.png",width=400)
+c1.text("""This app contains various analysis
+           based on total 23486 number of data.""")
 st.header("Fashion Data-Visualization",divider='rainbow')
 
 #Popular Product class  based on Ratings
