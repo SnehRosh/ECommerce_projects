@@ -37,8 +37,10 @@ type_trend="Women Clothing"
 c1.metric("Total PRODUCTS",total_products)
 c2.metric("Type",type_trend)
 c3.image("https://www.dlf.pt/dfpng/middlepng/475-4754245_women-fashion-ecommerce-website-development-fashion-website-png.png",width=400)
-c1.text("""This app contains various analysis
-           based on total 23486 number of data.""")
+c1.subheader("Insight: ")
+c1.text("""This app contains various analysis and
+its graphs based on total 23486 number 
+of data""")
 st.header("Fashion Data-Visualization",divider='rainbow')
 
 #Popular Product class  based on Ratings
